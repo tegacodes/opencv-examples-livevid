@@ -1,10 +1,7 @@
-<h1>Basic Computer Vision Examples with Greg Borenstein's openCV library for Processing</h1>  
-A few classic processing examples using  with live video capture.  
+<h3>Basic Computer Vision Examples with Greg Borenstein's openCV library for Processing</h3>  
+openCV library is here: https://github.com/atduskgreg/opencv-processing  
 
-His openCV library is here: https://github.com/atduskgreg/opencv-processing  
-
-Some of the functions from the open cv library used here:  
-
+Some of the functions from the open cv library used here are:  
 
 <code>opencv.loadImage(cam); </code>  
 loadImage loads frame of video or a PImage into the opencv buffer.
@@ -29,6 +26,17 @@ Flips the opencv buffer
 -1 - flips both  
   
 <code>opencv.loadCascade(OpenCV.CASCADE_FRONTALFACE); </code>   
+  
+<h3>Other functions that might be handy</h3>  
+<code>opencv.adaptiveThreshold(591, 1);</code>   
+<code>opencv.useColor();  </code>   
+<code>opencv.gray();</code>   
+<code>opencv.invert();</code>   
+<code>opencv.erode();</code>   
+<code>opencv.dilate();</code>   
+<code>opencv.findContours();</code>   
+
+
 
 
 
