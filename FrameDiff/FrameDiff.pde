@@ -1,5 +1,5 @@
-/**FrameDiff with OpenCV library
- * by Tega Brain, 2014.
+/**FrameDiff with OpenCV library and live video capture
+ * Tega Brain, 2014.
  *
  * This is a example of background removal using Greg Borenstein's opencv library
  * Similar to Eg. 16.14 in Learning Processing by Daniel Shiffman.
@@ -20,7 +20,7 @@ Capture cam;
 OpenCV opencv;
 
 //Pimages to store frames and processe frames.
-PImage  before, after, grayDiff;
+PImage  previous, current, grayDiff;
 PImage colorDiff, binaryDiff, green;
 
 int threshold=40;
@@ -37,8 +37,8 @@ void setup() {
 
   opencv.loadCascade(OpenCV.CASCADE_FRONTALFACE);  
 
-  //put a frame from the video in open cv and put into PImage 'before'
-  before = opencv.getSnapshot();
+  //put a frame from the video in open cv and put into PImage 'previous'
+  previous = opencv.getSnapshot();
 }
 
 // New images from camera
@@ -49,15 +49,15 @@ void captureEvent(Capture cam) {
 void draw() {
   // "Load" the current camera image into OpenCV 
   opencv.loadImage(cam);
-  // we then take the opencv frame and put it in PImage called after
-  after = opencv.getSnapshot();  
+  // we then take the opencv frame and put it in PImage called current
+  current = opencv.getSnapshot();  
 
-  // put the previous video frame, called 'after' into openCV 
-  opencv.loadImage(before);
+  // put the previous video frame, called 'current' into openCV 
+  opencv.loadImage(previous);
 
   //call the diff function that compares what is in openCV 
-  //with the current frame called 'after'
-  opencv.diff(after);
+  //with the current frame called 'current'
+  opencv.diff(current);
 
   //put the opencv frame into grayDiff
   grayDiff = opencv.getSnapshot(); 
@@ -71,17 +71,17 @@ void draw() {
   binaryDiff = opencv.getSnapshot(); 
 
   //draw our frames to the screen
-  image(before, 0, 0);
-  image(after, before.width, 0);
-  image(grayDiff, 0, before.height);
-  image(binaryDiff, before.width, before.height);
+  image(previous, 0, 0);
+  image(current, previous.width, 0);
+  image(grayDiff, 0, previous.height);
+  image(binaryDiff, previous.width, previous.height);
 
   //write titles
   fill(255);
-  text("before", 10, 20);
-  text("after", before.width +10, 20);
-  text("gray diff", 10, before.height+ 20);
-  text("binary diff", before.width + 10, before.height+ 20);
+  text("previous", 10, 20);
+  text("current", previous.width +10, 20);
+  text("gray diff", 10, previous.height+ 20);
+  text("binary diff", previous.width + 10, previous.height+ 20);
 
   //do something with the binaryDiff Pimage
 
@@ -105,8 +105,8 @@ void draw() {
 
   // "Load" the camera image into OpenCV 
   opencv.loadImage(cam);
-  // put the openCV frame into the before PImage - in the next run of draw this will be
+  // put the openCV frame into the previous PImage - in the next run of draw this will be
   // the previous frame
-  before = opencv.getSnapshot();
+  previous = opencv.getSnapshot();
 }
 

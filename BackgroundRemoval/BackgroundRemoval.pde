@@ -1,8 +1,10 @@
-/**Background Removal with OpenCV library
- * by Tega Brain, 2014.
+/**Background Removal with OpenCV library and live video capture
+ * Tega Brain, 2014.
  *
  * This is a example of background removal using Greg Borenstein's opencv library
  * Similar to Eg. 16.12 in Learning Processing by Daniel Shiffman.
+ *
+ * You set the background by clicking the mouse
  */
 
 
@@ -20,7 +22,7 @@ Capture cam;
 OpenCV opencv;
 
 //Pimages to store frames and processe frames.
-PImage  before, after, grayDiff;
+PImage  background, current, grayDiff;
 PImage colorDiff, binaryDiff, green;
 
 int threshold=35;
@@ -37,8 +39,8 @@ void setup() {
 
   opencv.loadCascade(OpenCV.CASCADE_FRONTALFACE);  
 
-  //put a frame from the video in open cv and put into PImage 'before'
-  before = opencv.getSnapshot();
+  //put a frame from the video in open cv and put into PImage 'background'
+  background = opencv.getSnapshot();
 }
 
 // New images from camera
@@ -51,15 +53,15 @@ void draw() {
   // We have to always "load" the current camera image into OpenCV 
   opencv.loadImage(cam);
 
-  // we then take this snapshot and put it in PImage called after
-  after = opencv.getSnapshot();  
+  // we then take this snapshot and put it in PImage called current
+  current = opencv.getSnapshot();  
 
-  // put the previous video frame, called 'after' into openCV 
-  opencv.loadImage(before);
+  // put the previous video frame, called 'current' into openCV 
+  opencv.loadImage(background);
 
   //call the diff function that compares what is in openCV 
-  //with the current frame called 'after'
-  opencv.diff(after);
+  //with the current frame called 'current'
+  opencv.diff(current);
 
   //put the opencv frame into grayDiff
   grayDiff = opencv.getSnapshot(); 
@@ -73,17 +75,17 @@ void draw() {
   binaryDiff = opencv.getSnapshot(); 
 
   //draw our frames to the screen
-  image(before, 0, 0);
-  image(after, before.width, 0);
-  image(grayDiff, 0, before.height);
-  image(binaryDiff, before.width, before.height);
+  image(background, 0, 0);
+  image(current, background.width, 0);
+  image(grayDiff, 0, background.height);
+  image(binaryDiff, background.width, background.height);
 
   //write titles
   fill(255);
-  text("before", 10, 20);
-  text("after", before.width +10, 20);
-  text("gray diff", 10, before.height+ 20);
-  text("binary diff", before.width + 10, before.height+ 20);
+  text("background", 10, 20);
+  text("current", background.width +10, 20);
+  text("gray diff", 10, background.height+ 20);
+  text("binary diff", background.width + 10, background.height+ 20);
 
   //do something with the binary diff image - create a green screen
  /*
@@ -105,9 +107,9 @@ void draw() {
    
    }
    }
-   image(green, 0, before.height);
-   text("green screen", 10, before.height+ 20);
-   /*
+   image(green, 0, background.height);
+   text("green screen", 10, background.height+ 20);
+   */
 }
 
 
@@ -115,6 +117,6 @@ void draw() {
 void mouseReleased() {
   // We have to always "load" the current camera image into OpenCV 
   opencv.loadImage(cam);
-  before = opencv.getSnapshot();
+  background = opencv.getSnapshot();
 }
 
