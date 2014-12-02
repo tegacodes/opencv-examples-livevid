@@ -25,7 +25,9 @@ Flips the opencv buffer
 0 - vertical flip  
 -1 - flips both  
   
-<code>opencv.loadCascade(OpenCV.CASCADE_FRONTALFACE); </code>   
+<code>opencv.loadCascade(OpenCV.CASCADE_FRONTALFACE); </code> 
+<code>opencv.loadCascade(OpenCV.CASCADE_EYE); </code>   
+<code>opencv.loadCascade(OpenCV.CASCADE_NOSE);</code>  
   
 <h3>Other functions that might be handy</h3>  
 <code>opencv.adaptiveThreshold(591, 1);</code>   
