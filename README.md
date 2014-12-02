@@ -1,4 +1,4 @@
-<bold>Basic Computer Vision Examples with Greg Borenstein's openCV library for Processing</bold>  
+<h1>Basic Computer Vision Examples with Greg Borenstein's openCV library for Processing</h1>  
 A few classic processing examples using  with live video capture.  
 
 His openCV library is here: https://github.com/atduskgreg/opencv-processing  
