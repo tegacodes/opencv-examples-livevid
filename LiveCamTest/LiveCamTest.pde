@@ -1,3 +1,5 @@
+/* Example by Greg Borenstein from library*/
+
 import gab.opencv.*;
 import processing.video.*;
 import java.awt.*;
